@@ -1,0 +1,8 @@
+.header{
+    position: absolute;
+    z-index: 100;
+    background-color: #FFF;
+    display: flex;
+    width: 100vw;
+    
+}
