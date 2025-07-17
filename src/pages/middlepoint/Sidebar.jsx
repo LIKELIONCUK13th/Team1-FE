@@ -10,7 +10,7 @@ function Sidebar({ onClose, onSelect }) {
   const [results, setResults] = useState([]);
   const [open, setOpen] = useState(false);
 
-  const KAKAO_API_KEY = config.KAKAO_API_KEY; // ⚠️ 여기에 실제 키 넣으세요
+  const KAKAO_API_KEY = config.KAKAO_API_KEY;
 
   useEffect(() => {
     setOpen(true);

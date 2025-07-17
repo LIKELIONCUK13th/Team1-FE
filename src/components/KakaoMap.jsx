@@ -1,11 +1,13 @@
 import { useEffect, useRef } from "react";
 import config from "../../apikey";
+import midPointMarker from "../image/MidPoint.png";
 import "./KakaoMap.css"; // 스타일 따로 정의
 
 const KakaoMap = ({ center, routes = [], destination }) => {
   const mapRef = useRef(null);
 
   const KAKAO_JS_KEY = config.KAKAO_JS_KEY;
+  const markerImages = ["/assets/BlueMarker.png", "/assets/OrangeMarker.png", "/assets/GreenMarker.png"]
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -25,12 +27,44 @@ const KakaoMap = ({ center, routes = [], destination }) => {
 
         // 도착지 마커 하나 생성 (destination)
         if (destination) {
+          const imageSize = new window.kakao.maps.Size(55, 36);
+          const imageOption = {
+            offset: new window.kakao.maps.Point(21, 42), // 중심 하단
+          };
+          const markerImage = new window.kakao.maps.MarkerImage(
+            midPointMarker,
+            imageSize,
+            imageOption
+          );
+
           new window.kakao.maps.Marker({
             map,
             position: new window.kakao.maps.LatLng(destination.lat, destination.lng),
             title: "도착지",
-            // 원하는 아이콘 커스터마이징 가능
+            image: markerImage,
           });
+
+          const destinationOverlay = new kakao.maps.CustomOverlay({
+            position: new kakao.maps.LatLng(destination.lat, destination.lng),
+            content: `
+              <div style="position: relative; display: flex; justify-content: center; align-items: center; width: 40px; height: 40px;">
+                <span style="
+                  position: absolute;
+                  top: 30%;
+                  left: 65%;
+                  transform: translate(-50%, -50%);
+                  color: white;
+                  font-weight: 500;
+                  font-size: 12px;
+                  pointer-events: none;
+                ">중간지점</span>
+              </div>
+            `,
+            yAnchor: 1,
+            zIndex: 5,
+          });
+
+          destinationOverlay.setMap(map);
         }
 
         // routes가 있을 때 선과 시작점 마커 그리기
@@ -43,20 +77,42 @@ const KakaoMap = ({ center, routes = [], destination }) => {
               path: linePath,
               strokeWeight: 5,
               strokeColor: getColorByIndex(index), // 아래 함수 참고
-              strokeOpacity: 0.7,
+              strokeOpacity: 1,
               strokeStyle: "solid",
             });
 
             // 2) 출발점 마커 (숫자 마커)
             if (route.length > 0) {
               const startPoint = route[0];
-              const marker = new window.kakao.maps.Marker({
-                map,
+
+              const content = `
+                <div style="
+                  position: relative;
+                  width: 40px;
+                  height: 40px;
+                ">
+                  <img src="${markerImages[index]}" style="width: 100%; height: 100%;" />
+                  <div style="
+                    position: absolute;
+                    top: 40%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-weight: bold;
+                    color: white;
+                    font-size: 16px;
+                  ">
+                    ${index + 1}
+                  </div>
+                </div>
+              `;
+
+              const customOverlay = new window.kakao.maps.CustomOverlay({
                 position: new window.kakao.maps.LatLng(startPoint.lat, startPoint.lng),
-                title: `출발지 ${index + 1}`,
-                // 숫자가 들어간 마커 이미지 커스터마이징 함수 호출
-                image: getNumberMarkerImage(index + 1),
+                content: content,
+                yAnchor: 1,
               });
+
+              customOverlay.setMap(map);
             }
           });
         }
@@ -76,7 +132,7 @@ export default KakaoMap;
 
 
 function getColorByIndex(index) {
-  const colors = ["#FF0000", "#00AAFF", "#00CC00", "#FF00FF", "#FFA500"];
+  const colors = ["#6297FE", "#F5AA42", "#1EE391"];
   return colors[index % colors.length];
 }
 
