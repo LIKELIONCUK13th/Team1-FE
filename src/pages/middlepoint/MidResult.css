@@ -1,0 +1,88 @@
+.header{
+    position: absolute;
+    z-index: 100;
+    background-color: #FFF;
+    display: flex;
+    width: 100vw;
+    top: -10px;
+    
+}
+
+
+.p-con{
+    color: #111;
+    font-weight: 600;
+    font-size: 16px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.midwayinfo{
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translate(-50%);
+    width: 360px;
+    height: 235px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #FFF;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 7px;
+}
+
+.place{
+    color: #111;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.time-first{
+    color: #111;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.time-second{
+    color: #8A8A8A;
+    font-size: 12px;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.gridding{
+    display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2열 */
+  column-gap: 35px;
+  row-gap: 24px;
+  width: 100%;
+  max-width: 450px; /* 원하는 최대 너비 */
+  margin-top: 14px;
+  margin-bottom: 24px;
+}
+
+.each-time{
+    color: #808080;
+    font-size: 16px;
+    font-weight: 500;
+
+     display: flex;           /* 수평 정렬의 핵심 */
+  flex-direction: row;
+}
+
+.trip-button{
+    color: #7573F0;
+    font-size: 12px;
+    font-weight: 600;
+
+    width: 260px;
+    height: 26px;
+
+    border-radius: 12px;
+    background-color: #ECEBFD;
+
+    align-self: center;
+}
