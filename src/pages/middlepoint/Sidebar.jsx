@@ -95,7 +95,7 @@ function Sidebar({ onClose, onSelect }) {
   return (
     <div className={`address-sidebar ${open ? 'open' : ''}`}>
       <div className="sidebar-header">
-        <button className='back-button' onClick={onClose}><img src="/image/BackButton.png" alt="뒤로가기"/></button>
+        <button className='back-button' onClick={onClose}><img src="/assets/BackButton.png" alt="뒤로가기"/></button>
         <input className='type-location'
           type="text"
           value={query}

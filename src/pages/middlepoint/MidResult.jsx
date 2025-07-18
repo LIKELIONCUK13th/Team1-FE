@@ -80,7 +80,7 @@ const MidResult = () => {
                 destination={destination}
             />
             <div className="header">
-                <button className='back-button' onClick={() => navigate(-1)}><img src="/image/BackButton.png" alt="뒤로가기"/></button>
+                <button className='back-button' onClick={() => navigate(-1)}><img src="/assets/BackButton.png" alt="뒤로가기"/></button>
                 <p className="p-con">중간장소 결과 보기</p>
             </div>
             <div className="midwayinfo">
