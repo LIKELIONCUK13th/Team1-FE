@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Sidebar.css';
-import backbutton from '../../../image/BackButton.png';
+//import backbutton from '../../../image/BackButton.png';
 import gps from '../../image/GPS.png';
 //import config from '../../../apikey';
 
@@ -95,7 +95,7 @@ function Sidebar({ onClose, onSelect }) {
   return (
     <div className={`address-sidebar ${open ? 'open' : ''}`}>
       <div className="sidebar-header">
-        <button className='back-button' onClick={onClose}><img src={backbutton} alt="뒤로가기"/></button>
+        <button className='back-button' onClick={onClose}><img src="/image/BackButton.png" alt="뒤로가기"/></button>
         <input className='type-location'
           type="text"
           value={query}
