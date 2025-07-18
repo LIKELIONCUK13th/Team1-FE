@@ -1,12 +1,12 @@
 import { useEffect, useRef } from "react";
-import config from "../../apikey";
+//import config from "../../apikey";
 import midPointMarker from "../image/MidPoint.png";
 import "./KakaoMap.css"; // 스타일 따로 정의
 
 const KakaoMap = ({ center, routes = [], destination }) => {
   const mapRef = useRef(null);
 
-  const KAKAO_JS_KEY = config.KAKAO_JS_KEY;
+  const KAKAO_JS_KEY = import.meta.env.VITE_KAKAO_JS_KEY;
   const markerImages = ["/assets/BlueMarker.png", "/assets/OrangeMarker.png", "/assets/GreenMarker.png"]
 
   useEffect(() => {

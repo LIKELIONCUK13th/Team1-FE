@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import KakaoMap from '../../components/KakaoMap.jsx';
 import backbutton from '../../image/BackButton.png';
 import axios from 'axios';
-import config from '../../../apikey';  // Kakao REST API 키가 들어있는 파일
+//import config from '../../../apikey';  // Kakao REST API 키가 들어있는 파일
 import './MidResult.css';
 
 const MidResult = () => {
@@ -17,6 +17,7 @@ const MidResult = () => {
     const [destinationAddress, setDestinationAddress] = useState('');
     const [durations, setDurations] = useState([]);
     const [averageDuration, setAverageDuration] = useState(0);
+    const KAKAO_API_KEY = import.meta.env.VITE_KAKAO_API_KEY;
 
     useEffect(() => {
         if (!midpointData || !Array.isArray(midpointData)) return;
@@ -49,7 +50,7 @@ const MidResult = () => {
                     `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${destination.lng}&y=${destination.lat}`,
                     {
                         headers: {
-                            Authorization: `KakaoAK ${config.KAKAO_API_KEY}`,
+                            Authorization: `KakaoAK ${KAKAO_API_KEY}`,
                         },
                     }
                 );
@@ -107,112 +108,3 @@ const MidResult = () => {
 };
 
 export default MidResult;
-
-
-/*import { useEffect, useState } from "react";
-import { useLocation } from 'react-router-dom';
-import KakaoMap from '../../components/KakaoMap.jsx';
-import backbutton from '../../image/backbutton.png';
-import './MidResult.css';
-
-const { kakao } = window;
-
-const MidResult = () => {
-    const location = useLocation();
-    const midpointData = location.state?.midpointData;
-
-    const [routes, setRoutes] = useState([]);
-    const [destination, setDestination] = useState(null);
-    const [destinationAddress, setDestinationAddress] = useState('');
-
-    useEffect(() => {
-        if (!midpointData || !Array.isArray(midpointData)) return;
-
-        // 각 route의 path만 가공
-        const processedRoutes = midpointData.map(entry =>
-        entry.path.map(p => ({
-            lat: p.y,
-            lng: p.x,
-        }))
-        );
-
-        // 도착지: 첫 항목의 endX, endY를 사용 (모두 같다고 가정)
-        const { endX, endY } = midpointData[0];
-
-        setRoutes(processedRoutes);
-        setDestination({ lat: endY, lng: endX });
-    }, [midpointData]);
-
-    useEffect(() => {
-        if (!destination) return;
-
-        if (window.kakao && window.kakao.maps) {
-            console.log("로드됨");
-            const geocoder = new window.kakao.maps.services.Geocoder();
-            geocoder.coord2Address(destination.lng, destination.lat, (result, status) => {
-            if (status === window.kakao.maps.services.Status.OK) {
-                const address = result[0];
-                const name = address?.road_address?.address_name || address?.address?.address_name;
-                setDestinationAddress(name || '주소 정보 없음');
-            }
-            });
-        } else {
-            console.error("Kakao 지도 SDK가 아직 로드되지 않았습니다.");
-        }
-    }, [destination]);
-    console.log({destinationAddress});
-    console.log('Geocoder 응답:', result, status);
-
-    
-
-    if (!routes.length || !destination) return <div>지도를 불러오는 중...</div>;
-
-    return (
-        <>
-            <KakaoMap
-            //mode="direct"
-            center={{ lat: destination.lat -0.002, lng: destination.lng }}
-            routes={routes}
-            destination={destination}
-            />
-            <div className="header">
-                <button className='back-button'><img src={backbutton} alt="뒤로가기"/></button>
-                <p>중간장소 결과 보기</p>
-            </div>
-            <div className="midwayinfo">
-                <div>{destinationAddress}d</div>
-                <div>시간 시간</div>
-                <div>
-                    <div>1</div>
-                    <div>2</div>
-                    <div>3</div>
-                    <div>4</div>
-                </div>
-                <button>ㅐㅐㅐㅐㅐㅐ</button>
-
-            </div>
-        </>
-        );
-    }; 
-
-export default MidResult;
-*/
-
-/*import config from '../../../apikey';
-import { useLocation } from 'react-router-dom';
-import './MidResult.css';
-
-
-
-const MidResult = () => {
-    const lo
-
-    return(
-        //헤더
-        
-        //인포
-        //최단경로찾기 nav
-    );
-};
-
-export default MidResult;*/

@@ -3,14 +3,14 @@ import axios from 'axios';
 import './Sidebar.css';
 import backbutton from '../../image/backbutton.png';
 import gps from '../../image/GPS.png';
-import config from '../../../apikey';
+//import config from '../../../apikey';
 
 function Sidebar({ onClose, onSelect }) {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [open, setOpen] = useState(false);
 
-  const KAKAO_API_KEY = config.KAKAO_API_KEY;
+  const KAKAO_API_KEY = import.meta.env.VITE_KAKAO_API_KEY;
 
   useEffect(() => {
     setOpen(true);
