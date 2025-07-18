@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 import KakaoMap from '../../components/KakaoMap.jsx';
-import backbutton from '../../image/BackButton.png';
+import backbutton from '../../../image/BackButton.png';
 import axios from 'axios';
 //import config from '../../../apikey';  // Kakao REST API 키가 들어있는 파일
 import './MidResult.css';
