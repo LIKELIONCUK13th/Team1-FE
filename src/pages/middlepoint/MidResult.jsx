@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 import KakaoMap from '../../components/KakaoMap.jsx';
-import backbutton from '../../image/BackButton.png';
+//import backbutton from '../../image/BackButton.png';
 import axios from 'axios';
 //import config from '../../../apikey';  // Kakao REST API 키가 들어있는 파일
 import './MidResult.css';
@@ -80,7 +80,7 @@ const MidResult = () => {
                 destination={destination}
             />
             <div className="header">
-                <button className='back-button' onClick={() => navigate(-1)}><img src={backbutton} alt="뒤로가기"/></button>
+                <button className='back-button' onClick={() => navigate(-1)}><img src="/image/BackButton.png" alt="뒤로가기"/></button>
                 <p className="p-con">중간장소 결과 보기</p>
             </div>
             <div className="midwayinfo">
