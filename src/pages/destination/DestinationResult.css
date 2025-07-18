@@ -1,0 +1,5 @@
+.chatbot-load{
+    position: absolute;
+    z-index: 100;
+    display: flex;
+}

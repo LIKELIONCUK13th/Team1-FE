@@ -70,6 +70,21 @@ const MidResult = () => {
         fetchAddress();
     }, [destination]);
 
+    const handleTripButton = () => {
+        if (!midpointData || midpointData.length === 0) return;
+
+        const { endX, endY } = midpointData[0];
+
+        navigate('/destinationresult', {
+            state: {
+                midpoint: {
+                    lat: endY,
+                    lng: endX,
+                },
+            },
+        });
+    };
+
     if (!routes.length || !destination) return <div>지도를 불러오는 중...</div>;
 
     return (
@@ -101,7 +116,7 @@ const MidResult = () => {
                         </div>
                         ))}
                 </div>
-                <button className="trip-button">★&nbsp;&nbsp;여행지 입력하고 중간지점에서 최단경로 찾기</button>
+                <button className="trip-button" onClick={handleTripButton}>★&nbsp;&nbsp;여행지 입력하고 중간지점에서 최단경로 찾기</button>
             </div>
         </>
     );

@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import FindMidpoint from './pages/middlepoint/FindMidpoint';
 import MidResult from './pages/middlepoint/MidResult';
+import FindWay from './pages/destination/FindWay';
+import DestinationResult from './pages/destination/DestinationResult'
 
 const Router = () => {
     return(
@@ -8,6 +10,9 @@ const Router = () => {
             <Routes>
                 <Route path="/" element={<FindMidpoint />} />
                 <Route path="/midresult" element={<MidResult />} />
+                <Route path="/findway" element={<FindWay />} />
+                <Route path="/optimalway" element={<DestinationResult />} />
+                
             </Routes>
         </BrowserRouter>
     );
