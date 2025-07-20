@@ -15,6 +15,7 @@ const Router = () => {
                 <Route path="/optimalway" element={<DestinationResult />} />
                 <Route path="/chatbot" element={<Chatbot />} />
                 
+                
             </Routes>
         </BrowserRouter>
     );
