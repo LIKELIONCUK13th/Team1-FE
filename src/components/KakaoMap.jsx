@@ -20,7 +20,7 @@ const KakaoMap = ({ center, routes = [], destination, mode = 'default', coordina
 
         const mapOption = {
           center: new window.kakao.maps.LatLng(center.lat, center.lng),
-          level: 4,
+          level: 8,
         };
 
         const map = new window.kakao.maps.Map(mapRef.current, mapOption);
@@ -39,16 +39,85 @@ const KakaoMap = ({ center, routes = [], destination, mode = 'default', coordina
             });
 
             // 2. 출발 마커
-            addMarkerWithLabel(map, coordinates[0], "출발", "green");
+            addImageMarker(map, coordinates[0], "/assets/BlueMarker.png");
 
             // 3. 도착 마커
-            addMarkerWithLabel(map, coordinates[coordinates.length - 1], "도착", "red");
+            addImageMarker(map, coordinates[coordinates.length - 1], "/assets/RedMarker.png");
           }
 
           // 4. 경유지 마커
-          viaPoints.forEach((pt, i) => {
-            addMarkerWithLabel(map, pt, `경유${i + 1}`, "orange");
+          console.log("viaPoints:", viaPoints);
+          viaPoints.forEach((pt) => {
+            addImageMarker(map, pt, "/assets/GreenMarker.png");
           });
+
+                    // 출발지
+          const startOverlay = new kakao.maps.CustomOverlay({
+            position: new kakao.maps.LatLng(coordinates[0].lat, coordinates[0].lng),
+            content: `
+              <div style="position: relative; display: flex; justify-content: center; align-items: center; width: 40px; height: 40px;">
+                <span style="
+                  position: absolute;
+                  top: 40%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  color: white;
+                  font-weight: 500;
+                  font-size: 12px;
+                  pointer-events: none;
+                ">출발</span>
+              </div>
+            `,
+            yAnchor: 1,
+            zIndex: 5,
+          });
+          startOverlay.setMap(map);
+
+          // 경유지들 (viaPoints 배열 사용)
+          viaPoints.forEach((point, idx) => {
+            const stopOverlay = new kakao.maps.CustomOverlay({
+              position: new kakao.maps.LatLng(point.lat, point.lng),
+              content: `
+                <div style="position: relative; display: flex; justify-content: center; align-items: center; width: 40px; height: 40px;">
+                  <span style="
+                    position: absolute;
+                    top: 40%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    color: white;
+                    font-weight: 500;
+                    font-size: 12px;
+                    pointer-events: none;
+                  ">경유${idx + 1}</span>
+                </div>
+              `,
+              yAnchor: 1,
+              zIndex: 5,
+            });
+            stopOverlay.setMap(map);
+          });
+
+          // 도착지
+          const endOverlay = new kakao.maps.CustomOverlay({
+            position: new kakao.maps.LatLng(coordinates[coordinates.length - 1].lat, coordinates[coordinates.length - 1].lng),
+            content: `
+              <div style="position: relative; display: flex; justify-content: center; align-items: center; width: 40px; height: 40px;">
+                <span style="
+                  position: absolute;
+                  top: 40%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  color: white;
+                  font-weight: 500;
+                  font-size: 12px;
+                  pointer-events: none;
+                ">도착</span>
+              </div>
+            `,
+            yAnchor: 1,
+            zIndex: 5,
+          });
+          endOverlay.setMap(map);
 
         } else {
           // 도착지 마커 하나 생성 (destination)
@@ -163,4 +232,15 @@ function getColorByIndex(index) {
   return colors[index % colors.length];
 }
 
+function addImageMarker(map, position, imageUrl) {
+  const imageSize = new kakao.maps.Size(40, 40); // 마커 이미지 크기
+  const imageOption = { offset: new kakao.maps.Point(20, 40) }; // 하단 중심 정렬
 
+  const markerImage = new kakao.maps.MarkerImage(imageUrl, imageSize, imageOption);
+
+  new kakao.maps.Marker({
+    map,
+    position: new kakao.maps.LatLng(position.lat, position.lng),
+    image: markerImage
+  });
+}

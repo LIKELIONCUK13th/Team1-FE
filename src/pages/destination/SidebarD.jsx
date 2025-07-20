@@ -100,7 +100,7 @@ function SidebarD({ onClose, onSelect }) {
           type="text"
           value={query}
           onChange={e => setQuery(e.target.value)}
-          placeholder="출발 위치를 입력해주세요"
+          placeholder="목적지를 입력해주세요"
         />
         <button className="search-button"onClick={handleSearch}>검색</button>
       </div>

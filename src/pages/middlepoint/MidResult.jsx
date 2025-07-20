@@ -75,7 +75,7 @@ const MidResult = () => {
 
         const { endX, endY } = midpointData[0];
 
-        navigate('/destinationresult', {
+        navigate('/findway', {
             state: {
                 midpoint: {
                     lat: endY,
@@ -100,7 +100,7 @@ const MidResult = () => {
             </div>
             <div className="midwayinfo">
                 <div className="place">{destinationAddress}</div>
-                <div className="duration"><span className="time-first">{averageDuration}분</span><span className="time-second">평균 이동시간</span></div>
+                <div className="duration"><span className="time-first">{parseInt(averageDuration/60)}분</span><span className="time-second">평균 이동시간</span></div>
                 <div className="gridding">
                     {durations.map((dur, idx) => (
                         <div className="each-time" key={idx}>
@@ -108,7 +108,7 @@ const MidResult = () => {
                                 alt={`${idx + 1}번 사용자 넘버 아이콘`}
                                 style={{ width: '24px', height: '24px', marginRight: '8px' }}
                             />
-                            {dur}분
+                            {parseInt(dur/60)}분
                             <img src={carImages[idx]}
                                 alt={`${idx + 1}번 사용자 색깔 아이콘`}
                                 style={{ width: '20px', height: '19px', marginLeft: '44px',}}

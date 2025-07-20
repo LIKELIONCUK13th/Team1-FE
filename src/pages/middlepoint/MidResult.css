@@ -71,6 +71,7 @@
 
      display: flex;           /* 수평 정렬의 핵심 */
   flex-direction: row;
+  align-items: center;
 }
 
 .trip-button{
