@@ -3,7 +3,7 @@ import FindMidpoint from './pages/middlepoint/FindMidpoint';
 import MidResult from './pages/middlepoint/MidResult';
 import FindWay from './pages/destination/FindWay';
 import DestinationResult from './pages/destination/DestinationResult'
-import Chatbot from './pages/chatbot/chatbot';
+import Chatbot from './pages/chatbot/Chatbot';
 
 const Router = () => {
     return(
