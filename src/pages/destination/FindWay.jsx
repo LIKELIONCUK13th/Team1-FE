@@ -56,9 +56,11 @@ const FindWay = () => {
         const destination = filledAddresses[filledAddresses.length - 1];
 
         const postData = { waypoints };
+
+        const BACKEND_KEY = import.meta.env.VITE_BACKEND_DOMAIN_KEY
         
         try {
-            const response = await axios.post('https://your-backend.com/api/path', postData); // 여기에 실제 URI 입력
+            const response = await axios.post(`${BACKEND_KEY}/map/optimal`, postData); // 여기에 실제 URI 입력
             console.log('경로 응답:', response.data);
 
             // ✅ 응답과 midpoint 함께 다음 페이지로 넘기기

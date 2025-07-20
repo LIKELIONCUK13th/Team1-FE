@@ -128,7 +128,7 @@ const DestinationResult = () => {
                 </div >
                 <div style={{marginLeft:'auto'}}><img src="/assets/bluecar.png" alt="차 이미지"/></div>
             </div>
-            <button className='chatbot-load' onClick={openChatbot}><img src="/assets/AI.png"/> </button>
+            <button className='chatbot-load' onClick={openChatbot}><img src="/assets/AIimg.svg"/> </button>
         </>
     );
 };

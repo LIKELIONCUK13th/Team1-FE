@@ -16,11 +16,7 @@ const Chatbot = () => {
   // 이전 페이지에서 받아온 placeName을 고정값으로 유지
   const placeName = location.state?.placeName || '';
 
-  const mockAnswer = `강남역 근처 일식집을 찾았습니다. 
-갓덴스시 강남점(초밥,롤), 이춘복참치&스시 강남점(참치회), 
-큰물참치 강남점(참치회), 참치공방 강남점(참치회), 
-우동명가 기리야마본진(돈까스,우동)이 있습니다. 
-이 중에서 어떤 종류의 일식집에 대해 더 자세한 정보를 원하시나요?\n`;
+  const mockAnswer = `강남역 근처 일식집을 찾았습니다. 갓덴스시 강남점(초밥,롤), 이춘복참치&스시 강남점(참치회), 큰물참치 강남점(참치회), 참치공방 강남점(참치회), 우동명가 기리야마본진(돈까스,우동)이 있습니다. 이 중에서 어떤 종류의 일식집에 대해 더 자세한 정보를 원하시나요?\n`;
 
   // 메시지가 추가될 때마다 스크롤을 아래로 이동
   useEffect(() => {
@@ -46,9 +42,11 @@ const Chatbot = () => {
     // 유저 메시지 추가
     setMessages(prev => [...prev, { type: 'user', text: question }]);
 
+    const BACKEND_KEY = import.meta.env.VITE_BACKEND_DOMAIN_KEY
+
     try {
       const response = await axios.post(
-        '/chatbot/ask',
+        `${BACKEND_KEY}/chatbot/ask`,
         { placeName, question },
         { headers: { 'Content-Type': 'application/json' } }
       );

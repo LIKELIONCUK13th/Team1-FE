@@ -29,6 +29,8 @@ const FindMidpoint = () => {
 
     const navigate = useNavigate();
 
+    const BACKEND_KEY = import.meta.env.VITE_BACKEND_DOMAIN_KEY
+
     const handleFindMidpoint = async () => {
         const allFilled = addresses.every(addr => addr.label && addr.lat !== null && addr.lng !== null);
 
@@ -45,7 +47,7 @@ const FindMidpoint = () => {
         };
 
         try {
-            const response = await axios.post('back uri', postData);
+            const response = await axios.post(`${BACKEND_KEY}/map/route`, postData);
             console.log('중간지점 응답:', response.data);
             navigate('/midresult', { state: { midpointData: response.data } });
 
